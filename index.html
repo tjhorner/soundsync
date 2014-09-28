@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Stuff</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<style>
+		html, body{
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<iframe src="about:blank" height="100%" width="100%" frameborder="0"></iframe>
+	<script>
+		var socket = io();
+		socket.on('soundcloud:song:change', function(o){
+			$('iframe').attr('src', 'http://w.soundcloud.com/player/?url=' + encodeURIComponent(o) + '&auto_play=1');
+		});
+
+		socket.on('hello', function(o){
+			if(location.hash.substring(1) === ""){
+				var sessionName = prompt('Enter session name:');
+				window.location = "#"+sessionName;
+			}else{
+				var sessionName = location.hash.substring(1);
+			}
+			socket.emit('session:name', sessionName);
+		});
+	</script>
+</body>
+</html>
