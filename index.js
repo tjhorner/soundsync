@@ -16,7 +16,7 @@ io.on('connection', function(socket){
 	socket.emit('hello', '');
 	socket.on('session:name', function(m){
 		socket.session = m;
-		socket.emit('soundcloud:song:change', (sessions[m] || ""));
+		socket.emit('soundcloud:song:current', (sessions[m] || ""));
 	});
 });
 

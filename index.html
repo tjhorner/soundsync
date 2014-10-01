@@ -7,13 +7,21 @@
 		html, body{
 			margin: 0;
 		}
+		.content{
+			margin: 5px;
+		}
 	</style>
 </head>
 <body>
-	<iframe src="about:blank" height="100%" width="100%" frameborder="0"></iframe>
+	<div class="content"><a href="https://github.com/GeekyGamer14/soundsync/raw/master/soundsync.apk">download the app</a></div>
+	<iframe src="about:blank" height="50%" width="100%" frameborder="0"></iframe>
 	<script>
 		var socket = io();
 		socket.on('soundcloud:song:change', function(o){
+			$('iframe').attr('src', 'http://w.soundcloud.com/player/?url=' + encodeURIComponent(o) + '&auto_play=1');
+		});
+
+		socket.on('soundcloud:song:current', function(o){
 			$('iframe').attr('src', 'http://w.soundcloud.com/player/?url=' + encodeURIComponent(o) + '&auto_play=1');
 		});
 
