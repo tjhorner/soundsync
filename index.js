@@ -34,3 +34,26 @@ app.post('/song', function(req, res){
 	sessions[req.body.session] = req.body.url;
 	res.send(req.body.url);
 });
+
+app.post('/control', function(req, res){
+	var action;
+	switch(req.body.type){
+		case 'next':
+			action = 'next';
+			break;
+		case 'previous':
+			action = 'previous';
+			break;
+		default:
+			action = 'toggle';
+			break;
+	}
+	for(var key in clients){
+		if(clients.hasOwnProperty(key)){
+			var socket = clients[key];
+			if(socket.session === req.body.session){
+				socket.emit('soundcloud:song:'+action, '');
+			}
+		}
+	}
+});
