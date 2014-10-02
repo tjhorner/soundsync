@@ -48,6 +48,7 @@ app.post('/control', function(req, res){
 			action = 'toggle';
 			break;
 	}
+	var clients = io.sockets.connected;
 	for(var key in clients){
 		if(clients.hasOwnProperty(key)){
 			var socket = clients[key];
