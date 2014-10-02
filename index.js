@@ -57,4 +57,5 @@ app.post('/control', function(req, res){
 			}
 		}
 	}
+	res.send('');
 });
