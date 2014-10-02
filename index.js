@@ -53,7 +53,7 @@ app.post('/control', function(req, res){
 		if(clients.hasOwnProperty(key)){
 			var socket = clients[key];
 			if(socket.session === req.body.session){
-				socket.emit('soundcloud:song:'+action, '');
+				socket.emit('soundcloud:control:'+action, '');
 			}
 		}
 	}
